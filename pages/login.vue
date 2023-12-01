@@ -13,28 +13,28 @@
                 <form class="mx-auto max-w-lg rounded-lg">
                     <div class="flex flex-col gap-4 p-4 md:p-8">
                         <div>
-                            <label for="email" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
+                            <label for="email" class="mb-2 inline-block text-[#030229] text-base">Email</label>
                             <input name="email"
-                                class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                                class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
 
                         <div>
                             <label for="password"
                                 class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
                             <input name="password"
-                                class="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                                class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
 
                         <button
-                            class="block rounded-lg bg-[#605BFF] px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Log
+                            class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Log
                             in</button>
+
+                        <div>
+                            <nuxt-link to="/signup" class="text-[#605BFF] hover:text-[#4b46c5]">No account, create a new one</nuxt-link>
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </template>
-
-<script setup>
-const value = ref('')
-</script>

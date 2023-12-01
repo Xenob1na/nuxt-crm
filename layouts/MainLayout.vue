@@ -1,5 +1,5 @@
 <template>
-    <div id="Menu-Left" class="w-full mx-auto flex">
+    <div id="Menu-Left" class="flex">
         <div class="bg-white h-screen py-[50px] px-6">
             <div class="flex gap-4 items-center">
                 <span>
@@ -13,13 +13,13 @@
             </div>
             <div class="mt-[50px]">
                 <div v-for="item in nav" :key="item.name" class="mb-8">
-                    <nuxt-link :to="item.path" class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4">
+                    <nuxt-link :to="item.path" class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 border">
                         <Icon :name="item.icon" color="#9A9AA9" width="30" height="30" />
                         <span class="text-[#9A9AA9] text-[18px]  font-semibold">{{ item.name }}</span>
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[450px]">
+            <div class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[450px] border">
                 <div>
                     <img src="/man.png" alt="">
                 </div>
@@ -33,7 +33,9 @@
                 </div>
             </div>
         </div>
-        <slot />
+        <div>
+            <slot />
+        </div>
     </div>
 </template>
 
