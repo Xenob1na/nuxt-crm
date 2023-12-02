@@ -3,42 +3,48 @@
         <MainLayout>
             <div class="max-w-[1400px] mt-8 ml-8">
                 <div class="flex items-center justify-between">
-                    <h1 class="text-[#030229] text-[24px] font-bold leading-normal">Customer List</h1>
+                    <h1 class="text-[#030229] text-[24px] font-bold leading-normal">Staff List</h1>
                     <div>
-                        <nuxt-link to="/add-customer">
+                        <nuxt-link to="/staff/add-staff">
                             <button
                                 class="flex items-center gap-[10px] bg-[#605BFF] hover:bg-[#4b46c5] transition duration-100 py-4 px-5 rounded-[10px]">
                                 <Icon name="ic:round-plus" color="white" width="24" height="24" />
-                                <p class="text-white tetx-[16px] font-medium">Add Customer</p>
+                                <p class="text-white tetx-[16px] font-medium">Add Staff</p>
                             </button>
                         </nuxt-link>
                     </div>
                 </div>
-                <CustomerList v-for="customers in customer" :key="customers.id" :customers="customers"
-                    @isDeleted="customers = []" />
+                <StaffList v-for="staff in staffs" :key="staff.id" :staff="staff"
+                    @isDeleted="staffs = []" />
             </div>
         </MainLayout>
     </div>
 </template>
 
 <script setup>
-import MainLayout from '../layouts/MainLayout.vue'
+import MainLayout from '../../layouts/MainLayout.vue'
 
-const customer = ref([])
+const staffs = ref([])
 
 onBeforeMount(() => {
-    customer.value = [
+    staffs.value = [
         {
             id: 1,
             name: 'John Doe',
             phone: '+33757005467',
             email: 'neil.sims@flowbite.com',
+            age: 38,
+            adress: 'New York No. 1 Lake Park',
+            post: 'Tracker',
         },
         {
             id: 2,
             name: 'Stiven Doe',
             phone: '+33757005467',
             email: 'neil.sims@flowbite.com',
+            age: 38,
+            adress: 'New York No. 1 Lake Park',
+            post: 'Tracker',
         }
     ]
 })

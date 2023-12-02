@@ -10,6 +10,15 @@
                         Phone number
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Adress
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Post
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Age
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Action
                     </th>
                 </tr>
@@ -18,15 +27,24 @@
                 <tr class="bg-white border-b rounded-[10px]  hover:bg-gray-50">
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
                         <div class="ps-3">
-                            <div class="text-base font-semibold">{{ customers.name }}</div>
-                            <div class="font-normal text-gray-500">{{ customers.email }}</div>
+                            <div class="text-base font-semibold">{{ staff.name }}</div>
+                            <div class="font-normal text-gray-500">{{ staff.email }}</div>
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        {{ customers.phone }}
+                        {{ staff.phone }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ staff.adress }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ staff.post }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ staff.age }}
                     </td>
                     <td class="px-6 py-4 flex gap-2">
-                        <nuxt-link :to="`/edit-customer-${customers.id}`"
+                        <nuxt-link :to="`/staff/edit-staff-${staff.id}`"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] text-white transition duration-100 font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-[10px]">
                             <span>
                                 <svg width="12" height="12" viewBox="0 0 8 8" fill="none"
@@ -36,7 +54,7 @@
                                         fill="white" />
                                 </svg>
                             </span>
-                            <span>Edit customer
+                            <span>Edit staff
                             </span>
                         </nuxt-link>
                         <button type="button"
@@ -60,7 +78,7 @@
 
 <script setup>
 const props = defineProps({
-    customers: Object
+    staff: Object
 })
 const emit = defineEmits(['isDeleted'])
 const isMenuEdit = ref(false)

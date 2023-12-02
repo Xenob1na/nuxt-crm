@@ -1,6 +1,6 @@
 <template>
-    <div id="Menu-Left" class="flex">
-        <div class="bg-white h-screen py-[50px] px-6">
+    <div id="Menu-Left">
+        <div class="bg-white py-[50px] px-6">
             <div class="flex gap-4 items-center">
                 <span>
                     <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,22 +13,25 @@
             </div>
             <div class="mt-[50px]">
                 <div v-for="item in nav" :key="item.name" class="mb-8">
-                    <nuxt-link :to="item.path" class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 border">
-                        <Icon :name="item.icon" color="#9A9AA9" width="30" height="30" />
-                        <span class="text-[#9A9AA9] text-[18px]  font-semibold">{{ item.name }}</span>
+                    <nuxt-link :to="item.path"
+                        class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 border hover:bg-[#e4e4e4] transition duration-100">
+                        <Icon :name="item.icon" class="text-gray-700" width="30" height="30" />
+                        <span class="text-gray-700 text-[18px]  font-semibold">{{ item.name }}</span>
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[450px] border">
+            <div class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[350px] border">
+                <nuxt-link to="/profile">
+                    <div>
+                        <img src="/man.png" alt="">
+                    </div>
+                </nuxt-link>
                 <div>
-                    <img src="/man.png" alt="">
-                </div>
-                <div>
-                    <span class="text-[#9A9AA9] text-[16px] font-semibold">John Doe</span>
+                    <span class="text-gray-700 text-[16px] font-semibold">John Doe</span>
                 </div>
                 <div>
                     <nuxt-link to="/login">
-                        <Icon name="solar:logout-2-bold" width="20" height="20" flip="horizontal" color="#9A9AA9"/>
+                        <Icon name="solar:logout-2-bold" width="20" height="20" flip="horizontal" class="text-gray-700" />
                     </nuxt-link>
                 </div>
             </div>
@@ -52,9 +55,22 @@ const nav = [
         path: '/schedule'
     },
     {
+        name: 'Staff',
+        icon: 'ic:baseline-people',
+        path: '/staff'
+    },
+    {
         name: 'Tasks',
         icon: 'clarity:tasks-line',
         path: '/tasks'
     }
 ]
 </script>
+
+<style scoped>
+#Menu-Left {
+    display: grid;
+    grid-template-columns: 1fr 6fr;
+    min-height: 100vh;
+}
+</style>
