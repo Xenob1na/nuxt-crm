@@ -4,22 +4,22 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-100  ">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        ФИО
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Phone number
+                        Номер телефона
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Adress
+                        Адрес
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Post
+                        Должность
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Age
+                        Возраст
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        Действия
                     </th>
                 </tr>
             </thead>
@@ -54,7 +54,7 @@
                                         fill="white" />
                                 </svg>
                             </span>
-                            <span>Edit staff
+                            <span>Редактировать
                             </span>
                         </nuxt-link>
                         <button type="button"
@@ -67,7 +67,7 @@
                                         fill="white" />
                                 </svg>
                             </span>
-                            <span>Deleted</span>
+                            <span>Удалить</span>
                         </button>
                     </td>
                 </tr>

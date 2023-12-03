@@ -4,13 +4,16 @@
             <thead class="text-xs text-gray-700 uppercase bg-gray-100  ">
                 <tr>
                     <th scope="col" class="px-6 py-3">
-                        Name
+                        ФИО
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Phone number
+                        Номер телефона
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Action
+                        Адрес
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Действия
                     </th>
                 </tr>
             </thead>
@@ -25,6 +28,9 @@
                     <td class="px-6 py-4">
                         {{ customers.phone }}
                     </td>
+                    <td class="px-6 py-4">
+                        {{ customers.adress }}
+                    </td>
                     <td class="px-6 py-4 flex gap-2">
                         <nuxt-link :to="`/edit-customer-${customers.id}`"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] text-white transition duration-100 font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-[10px]">
@@ -36,7 +42,7 @@
                                         fill="white" />
                                 </svg>
                             </span>
-                            <span>Edit customer
+                            <span>Редактировать
                             </span>
                         </nuxt-link>
                         <button type="button"
@@ -49,7 +55,7 @@
                                         fill="white" />
                                 </svg>
                             </span>
-                            <span>Deleted</span>
+                            <span>Удалить</span>
                         </button>
                     </td>
                 </tr>

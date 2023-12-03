@@ -20,14 +20,14 @@
                     </nuxt-link>
                 </div>
             </div>
-            <div class="flex gap-4 items-center bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[350px] border">
+            <div class="flex justify-between items-center w-full bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[350px] border">
                 <nuxt-link to="/profile">
                     <div>
                         <img src="/man.png" alt="">
                     </div>
                 </nuxt-link>
                 <div>
-                    <span class="text-gray-700 text-[16px] font-semibold">John Doe</span>
+                    <span class="text-gray-700 text-[16px] font-semibold">Иван Ким</span>
                 </div>
                 <div>
                     <nuxt-link to="/login">
@@ -45,22 +45,22 @@
 <script setup>
 const nav = [
     {
-        name: 'Customer',
+        name: 'Клиенты',
         icon: 'raphael:customer',
         path: '/'
     },
     {
-        name: 'Schedule',
+        name: 'График',
         icon: 'ant-design:schedule-outlined',
         path: '/schedule'
     },
     {
-        name: 'Staff',
+        name: 'Персонал',
         icon: 'ic:baseline-people',
         path: '/staff'
     },
     {
-        name: 'Tasks',
+        name: 'Заметки',
         icon: 'clarity:tasks-line',
         path: '/tasks'
     }
