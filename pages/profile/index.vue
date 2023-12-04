@@ -88,5 +88,8 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Мой профиль'
+});
 import MainLayout from '../../layouts/MainLayout.vue'
 </script>

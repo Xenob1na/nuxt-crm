@@ -71,5 +71,8 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Добавить Сотрудника'
+});
 import MainLayout from '../layouts/MainLayout.vue'
 </script>

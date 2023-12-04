@@ -43,3 +43,9 @@
         </div>
     </div>
 </template>
+
+<script setup>
+useHead({
+    title: 'Регистрация'
+});
+</script>

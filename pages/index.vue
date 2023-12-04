@@ -7,7 +7,7 @@
                     <div>
                         <nuxt-link to="/add-customer">
                             <button
-                                class="flex items-center gap-[10px] bg-[#605BFF] hover:bg-[#4b46c5] transition duration-100 py-4 px-5 rounded-[10px]">
+                                class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] transition duration-100 py-4 px-5 rounded-[10px]">
                                 <Icon name="ic:round-plus" color="white" width="24" height="24" />
                                 <p class="text-white tetx-[16px] font-medium">Добавить клиента</p>
                             </button>
@@ -22,6 +22,9 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Список клиентов'
+});
 import MainLayout from '../layouts/MainLayout.vue'
 
 const customer = ref([])

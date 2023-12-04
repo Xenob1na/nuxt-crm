@@ -58,6 +58,9 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Редактирование Клиента'
+});
 import MainLayout from '../layouts/MainLayout.vue'
 const route = useRoute()
 </script>

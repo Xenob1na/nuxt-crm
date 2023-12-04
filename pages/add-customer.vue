@@ -55,5 +55,8 @@
 </template>
 
 <script setup>
+useHead({
+    title: 'Добавить Клиента'
+});
 import MainLayout from '../layouts/MainLayout.vue'
 </script>
