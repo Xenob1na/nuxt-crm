@@ -9,7 +9,7 @@
                             fill="#605BFF" />
                     </svg>
                 </span>
-                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Login</h2>
+                <h2 class="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 lg:text-3xl">Авторизоваться</h2>
                 <form class="mx-auto max-w-lg rounded-lg">
                     <div class="flex flex-col gap-4 p-4 md:p-8">
                         <div>
@@ -26,8 +26,7 @@
                         </div>
 
                         <button
-                            class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Log
-                            in</button>
+                            class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Авторизоваться</button>
 
                         <div>
                             <nuxt-link to="/signup" class="text-[#605BFF] hover:text-[#4b46c5]">No account, create a new one</nuxt-link>

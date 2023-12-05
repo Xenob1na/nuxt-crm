@@ -1,14 +1,11 @@
 <template>
     <MainLayout>
-        <div>
-            {{ route.params.id }}
-        </div>
-        <div class="max-w-[1400px] mt-8 ml-8">
+        <div class="max-w-[1400px] mt-8 mb-3 ml-8">
             <div class="mb-8">
                 <h1 class="text-[#030229] text-[24px] font-bold leading-normal">Редактирование Сотрудника</h1>
             </div>
 
-            <div class="bg-white py-6 sm:py-8 lg:py-12 rounded-[10px]">
+            <div class="bg-white py-6 sm:py-8 lg:py-9 rounded-[10px]">
                 <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
 
                     <form class="mx-auto  rounded-lg">

@@ -1,6 +1,6 @@
 <template>
     <MainLayout>
-        <div class="max-w-[1400px] mt-8 ml-8">
+        <div class="max-w-[1400px] mt-8 mb-3 ml-8">
             <div class="flex items-center justify-between mb-8">
                 <h1 class="text-[#030229] text-[24px] font-bold leading-normal">Мой профиль</h1>
                 <div>

@@ -48,6 +48,7 @@ onBeforeMount(() => {
             phone: '+33757005467',
             email: 'neil.sims@flowbite.com',
             adress: 'New York No. 1 Lake Park',
+            detail: 'В работе',
         },
         {
             id: 2,
@@ -55,6 +56,7 @@ onBeforeMount(() => {
             phone: '+33757005467',
             email: 'neil.sims@flowbite.com',
             adress: 'New York No. 1 Lake Park',
+            detail: 'Завершен',
         },
         {
             id: 3,
@@ -62,6 +64,7 @@ onBeforeMount(() => {
             phone: '+33757005467',
             email: 'neil.sims@flowbite.com',
             adress: 'New York No. 1 Lake Park',
+            detail: 'В работе',
         }
     ]
 })
