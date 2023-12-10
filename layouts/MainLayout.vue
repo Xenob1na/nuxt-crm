@@ -23,12 +23,9 @@
             <div class="flex justify-between items-center w-full bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[350px] border">
                 <nuxt-link to="/profile">
                     <div>
-                        <img src="/man.png" alt="">
+                        <span class="text-gray-700 text-[16px] font-semibold">Иван Ким</span>
                     </div>
                 </nuxt-link>
-                <div>
-                    <span class="text-gray-700 text-[16px] font-semibold">Иван Ким</span>
-                </div>
                 <div>
                     <nuxt-link to="/login">
                         <Icon name="solar:logout-2-bold" width="20" height="20" flip="horizontal" class="text-gray-700" />

@@ -19,24 +19,7 @@
 
                     <form class="mx-auto  rounded-lg">
                         <div class="flex flex-col gap-4 p-4 md:p-8">
-                            <div class="flex items-center space-x-6">
-                                <div class="shrink-0">
-                                    <img id='preview_img' class="h-16 w-16 object-cover rounded-full"
-                                        src="/man.png"
-                                        alt="Current profile photo" />
-                                </div>
-                                <label class="block">
-                                    <span class="sr-only">Выберите фотографию профиля</span>
-                                    <input type="file" onchange="loadFile(event)" class="block w-full text-sm text-slate-500
-        file:mr-4 file:py-2 file:px-4
-        file:rounded-full file:border-0
-        file:text-sm file:font-semibold
-        file:bg-violet-50 file:text-violet-700
-        hover:file:bg-violet-100
-      " />
-                                </label>
-                            </div>
-
+                        
                             <div>
                                 <label for="fullName" class="mb-2 inline-block text-[#030229] text-base">ФИО</label>
                                 <input name="fullName"
@@ -50,7 +33,7 @@
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                             </div>
 
-                            <div>
+                            <!-- <div>
                                 <label for="phone" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Номер телефона</label>
                                 <input name="phone"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
@@ -73,7 +56,7 @@
                                 <label for="age" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Возраст</label>
                                 <input name="age"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
-                            </div>
+                            </div> -->
 
                             <button
                                 class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Сохранить</button>
