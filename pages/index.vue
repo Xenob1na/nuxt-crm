@@ -25,6 +25,11 @@
 useHead({
     title: 'Список клиентов'
 });
+
+// definePageMeta({
+//     middleware: 'auth',
+// });
+
 import MainLayout from '../layouts/MainLayout.vue'
 
 const customer = ref([])

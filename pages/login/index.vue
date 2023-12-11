@@ -15,6 +15,7 @@
                         <div>
                             <label for="email" class="mb-2 inline-block text-[#030229] text-base">Email</label>
                             <input name="email"
+                                v-model="user.email"
                                 class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
 
@@ -22,10 +23,12 @@
                             <label for="password"
                                 class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
                             <input name="password"
+                                v-model="user.password"
                                 class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
 
                         <button
+                            @click.prevent="login"
                             class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">Авторизоваться</button>
 
                         <div>
@@ -38,8 +41,29 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     title: 'Авторизоваться'
 });
+
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '../../store/auth';
+
+const {authenticateUser} = useAuthStore();
+const {authenticated} = storeToRefs(useAuthStore());
+
+const user = ref({
+    email: '',
+    password: ''
+})
+
+const router = useRouter();
+
+const login = async () => {
+    await authenticateUser(user.value);
+
+    if (authenticated) {
+        router.push('/')
+    }
+}
 </script>

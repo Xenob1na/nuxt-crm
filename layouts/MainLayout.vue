@@ -23,11 +23,11 @@
             <div class="flex justify-between items-center w-full bg-[#F5F5F5] rounded-[10px] px-3 py-4 mt-[350px] border">
                 <nuxt-link to="/profile">
                     <div>
-                        <span class="text-gray-700 text-[16px] font-semibold">Иван Ким</span>
+                        <span class="text-gray-700 text-[16px] font-semibold">{{ user }}</span>
                     </div>
                 </nuxt-link>
-                <div>
-                    <nuxt-link to="/login">
+                <div class="cursor-pointer">
+                    <nuxt-link @click="logout">
                         <Icon name="solar:logout-2-bold" width="20" height="20" flip="horizontal" class="text-gray-700" />
                     </nuxt-link>
                 </div>
@@ -39,7 +39,20 @@
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { useAuthStore } from '../store/auth';
+
+const router = useRouter();
+
+const { logUserOut } = useAuthStore();
+const { user } = storeToRefs(useAuthStore());
+
+const logout = () => {
+    logUserOut();
+    router.push('/');
+}
+
 const nav = [
     {
         name: 'Клиенты',
