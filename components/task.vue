@@ -1,11 +1,10 @@
 <template>
   <div>
     <div class="bg-white py-5 px-9 w-full rounded-[5px]"
-    :class="{'bg-[#e2ee83]': items.completed}"
     >
       <div class="flex justify-between">
         <p class="text-[#030229] font-bold text-[16px]">
-          {{ items.title }}
+          {{ items.task_title }}
         </p>
         <div @click="isMenu = !isMenu" class="relative">
           <button :disabled="isDeleting"
@@ -33,24 +32,39 @@
         </div>
       </div>
       <div>
-        <p class="text-[#030229] text-[14px]">{{ items.body }}</p>
+        <p class="text-[#030229] text-[14px]">{{ items.task_body }}</p>
       </div>
       <div class="flex justify-end mt-4">
         <p class="text-[#030229] text-[14px] font-bold flex items-center gap-2">
           <Icon name="fluent-mdl2:event-date" color="black" width="16" height="16" />
-          <span>04 Декабря 2023</span>
+          <span>{{ displayableDate(items.created_date) }}</span>
         </p>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 
-const props = defineProps({
-  items: Object
-})
+
+interface Task {
+  task_id: number;
+  task_title: string;
+  task_body: string;
+  created_date: string;
+}
+
+const props = defineProps<{
+  items: Task
+}>()
 const emit = defineEmits(['isDeleted'])
+
+const displayableDate = (date: any) => {
+    return new Intl.DateTimeFormat(
+        'ru-RU',
+        { dateStyle: 'full' },
+    ).format(new Date(date))
+}
 
 const isMenu = ref(false)
 const isDeleting = ref(false)

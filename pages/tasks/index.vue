@@ -5,7 +5,7 @@
                 <div class="flex items-center justify-between">
                     <h1 class="text-[#030229] text-[24px] font-bold leading-normal">Список заметок</h1>
                     <div class="flex gap-3">
-                        <button @click="OpenModel"
+                        <button @click="isLogoutOverlay = true"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] transition duration-100 py-4 px-5 rounded-[10px]">
                             <Icon name="ic:round-plus" color="white" width="24" height="24" />
                             <p class="text-white tetx-[16px] font-medium">Добавить заметку</p>
@@ -18,60 +18,46 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-3 gap-3 mt-8">
-                    <task v-for="item in items" :key="item.id" :items="item" @isDeleted="item = []" />
+                    <task v-for="item in items" :key="item.task_id" :items="item" @isDeleted="item = []" />
                 </div>
                 <div>
-                    <Modal v-if="IsModal" @close="IsModal = false" />
+                    
                 </div>
                 <div v-if="items.length === 0">
-                    <h3 class="text-center text-[22px] text-[#030229]">Нету заметок, создайте их и ничего не забудьте!!!</h3>
+                    <h3 class="text-center text-[22px] text-[#030229]">Нету заметок, создайте их и ничего не забудьте!!!
+                    </h3>
                 </div>
             </div>
         </MainLayout>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     title: 'Список заметок'
 });
 import MainLayout from '../../layouts/MainLayout.vue'
+import { storeToRefs } from 'pinia';
+import { useTaskStore } from '../../store/task';
 
-const IsModal = ref(false)
-const items = ref([])
+const { getTask } = useTaskStore();
+const { tasks, isLogoutOverlay } = storeToRefs(useTaskStore());
 
-const OpenModel = () => {
-    IsModal.value = !IsModal.value
+interface Task {
+    task_id: number;
+    task_title: string;
+    task_body: string;
+    created_date: string;
 }
 
-onBeforeMount(() => {
-    items.value = [
+const items = ref<Task[]>([])
 
-        {
-            id: 1,
-            title: 'Task 1',
-            body: 'Discussion for management dashboard ui design',
-            completed: false
-        },
-        {
-            id: 2,
-            title: 'Task 2',
-            body: 'Discussion for management dashboard ui design',
-            completed: false
-        },
-        {
-            id: 3,
-            title: 'Task 3',
-            body: 'Discussion for management dashboard ui design',
-            completed: false
-        },
-        {
-            id: 3,
-            title: 'Task 3',
-            body: 'Discussion for management dashboard ui design',
-            completed: false
-        },
-    ]
+onMounted(() => {
+    getTask()
+})
+
+onBeforeMount(() => {
+    items.value = tasks.value
 
 })
 </script>
