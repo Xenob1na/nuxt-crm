@@ -3,15 +3,20 @@
     <NuxtPage />
 
     <Modal :class="[
-      { 'max-h-[100vh] transition-all duration-200 ease-in visible': isLogoutOverlay },
-      { 'max-h-0 transition-all duration-200 ease-out invisible': !isLogoutOverlay },
+      { 'max-h-[100vh] transition-all duration-200 ease-in visible': isCloseOverlay },
+      { 'max-h-0 transition-all duration-200 ease-out invisible': !isCloseOverlay },
+    ]" />
+
+    <ModalWarning :class="[
+      { 'max-h-[100vh] transition-all duration-200 ease-in visible': isModalWarning },
+      { 'max-h-0 transition-all duration-200 ease-out invisible': !isModalWarning },
     ]" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from './store/task';
-const { isLogoutOverlay } = storeToRefs(useTaskStore());
+const { isCloseOverlay, isModalWarning } = storeToRefs(useTaskStore());
 </script>
 
 <style>

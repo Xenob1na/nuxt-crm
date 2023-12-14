@@ -2,7 +2,7 @@
     <div id="Modal"
         class="fixed grid place-items-center  z-50 bottom-0 bg-black bg-opacity-50 backdrop-blur-md h-screen w-full">
         <div class="bg-white w-full max-w-[500px] rounded-lg text-white border border-gray-500 p-2">
-            <button class="flex justify-between bg-white w-full p-3" @click="isLogoutOverlay = false">
+            <button class="flex justify-between bg-white w-full p-3" @click="isCloseOverlay = false">
                 <p class="text-[#030229] font-bold text-[16px]">Новая заметка</p>
                 <Icon name="mdi:close" size="25" color="black" />
             </button>
@@ -35,7 +35,7 @@
 import { useTaskStore } from '../store/task';
 
 const { addTask, getTask } = useTaskStore();
-const { isLogoutOverlay } = storeToRefs(useTaskStore());
+const { isCloseOverlay } = storeToRefs(useTaskStore());
 
 
 const form = reactive({
@@ -44,9 +44,15 @@ const form = reactive({
 
 })
 
+const clearData = () => {
+    form.task_title = ''
+    form.task_body = ''
+}
+
 const CreateTask = async () => {
     await addTask(form)
     await getTask()
-    isLogoutOverlay.value = false 
+    clearData()
+    isCloseOverlay.value = false 
 }
 </script>

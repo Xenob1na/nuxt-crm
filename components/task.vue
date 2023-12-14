@@ -1,7 +1,6 @@
 <template>
   <div>
-    <div class="bg-white py-5 px-9 w-full rounded-[5px]"
-    >
+    <div class="bg-white py-5 px-9 w-full rounded-[5px]">
       <div class="flex justify-between">
         <p class="text-[#030229] font-bold text-[16px]">
           {{ items.task_title }}
@@ -15,18 +14,10 @@
           </button>
 
           <div v-if="isMenu" class="absolute border right-0 z-20 mt-1 rounded">
-            <button
+            <button @click="deleteTask(items.task_id)"
               class="flex items-center rounded gap-2 text-red-500 justify-between bg-white w-full pl-4 pr-3 py-2 hover:bg-[#e1e1e1]">
               <div>Удалить</div>
               <Icon name="solar:trash-bin-trash-broken" size="20" />
-            </button>
-            <div class="border-b" />
-            <button
-              class="flex items-center rounded gap-2 text-green-500 justify-between bg-white w-full pl-4 pr-3 py-2 hover:bg-[#e1e1e1]"
-              @click="toggleCompeted(items.id)"
-              >
-              <div>Готово</div>
-              <Icon name="material-symbols:done" size="20" />
             </button>
           </div>
         </div>
@@ -45,7 +36,9 @@
 </template>
 
 <script setup lang="ts">
-
+import { storeToRefs } from 'pinia';
+import { useTaskStore } from '../store/task';
+const { isModalWarning } = storeToRefs(useTaskStore())
 
 interface Task {
   task_id: number;
@@ -60,13 +53,29 @@ const props = defineProps<{
 const emit = defineEmits(['isDeleted'])
 
 const displayableDate = (date: any) => {
-    return new Intl.DateTimeFormat(
-        'ru-RU',
-        { dateStyle: 'full' },
-    ).format(new Date(date))
+  return new Intl.DateTimeFormat(
+    'ru-RU',
+    { dateStyle: 'full' },
+  ).format(new Date(date))
+}
+
+const deleteTask = async (id: Number) => {
+  isModalWarning.value = true
+
+  try {
+    isMenu.value = false
+    isDeleting.value = true
+
+    await $fetch('http://localhost:5000/api/tasks/' + id, {
+      method: 'DELETE',
+    })
+    emit('isDeleted', true)
+    isDeleting.value = false
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 const isMenu = ref(false)
 const isDeleting = ref(false)
-const isDone = ref(false)
 </script>

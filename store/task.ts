@@ -15,7 +15,8 @@ interface TaskCreate {
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
     tasks: [] as Task[],
-    isLogoutOverlay: false,
+    isCloseOverlay: false,
+    isModalWarning: false,
   }),
   actions: {
     async getTask() {
