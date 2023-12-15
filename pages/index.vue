@@ -14,38 +14,86 @@
                         </nuxt-link>
                     </div>
                 </div>
-                <CustomerList v-for="customers in customer" :key="customers.id" :customers="customers"
-                    @isDeleted="customers = []" />
+                <ClientOnly>
+
+                    <template #fallback>
+
+                        <div class="text-black mx-auto flex flex-col items-center justify-center">
+                            <Icon name="eos-icons:three-dots-loading" size="50" color="black" />
+                            <div class="text-black">Загрузка данных...</div>
+                        </div>
+                    </template>
+                </ClientOnly>
+
+                <div v-if="isLoading">
+                    <div class="text-black mx-auto flex flex-col items-center justify-center">
+                        <Icon name="eos-icons:three-dots-loading" size="50" color="black" />
+                        <div class="text-black">Загрузка данных...</div>
+                    </div>
+                </div>
+
+                <div v-else-if="isCustomer">
+                    <CustomerList v-for="Customer in customers" :key="Customer.customer_id" :Customer="Customer"
+                         />
+                </div>
             </div>
         </MainLayout>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     title: 'Список клиентов'
 });
 
 import MainLayout from '../layouts/MainLayout.vue'
+import { storeToRefs } from 'pinia';
+import { useCustomerStore } from '../store/customer'
 
-const customer = ref([])
+const { getCustomer } = useCustomerStore()
+const { customer } = storeToRefs(useCustomerStore())
+
+interface Customer {
+    customer_id: number;
+    full_name_customer: string;
+    email: string;
+    phone: string | number;
+    address: string;
+    description: string;
+}
+
+const customers = ref<Customer[]>([])
+const isCustomer = ref(false)
+const isLoading = ref(false)
+
+onMounted(async () => {
+    isLoading.value = true
+    try {
+        await getCustomer()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+})
 
 onBeforeMount(() => {
-    customer.value = [
-        {
-            id: 1,
-            name: 'John Doe',
-            phone: '+33757005467',
-            email: 'neil.sims@flowbite.com',
-            adress: 'New York No. 1 Lake Park',
-        },
-        {
-            id: 2,
-            name: 'Stiven Doe',
-            phone: '+33757005467',
-            email: 'neil.sims@flowbite.com',
-            adress: 'New York No. 1 Lake Park',
+    watchEffect(() => {
+        customers.value = customer.value
+        if (customer && customer.value.length >= 1) {
+            isCustomer.value = true
+        } else {
+            isCustomer.value = false
         }
-    ]
+    })
 })
+
+watch(() => customers.value, () => {
+    customers.value = customer.value
+    if (customer && customer.value.length >= 1) {
+        isCustomer.value = true
+    } else {
+        isCustomer.value = false
+    }
+}, { deep: true })
 </script>

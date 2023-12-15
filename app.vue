@@ -11,12 +11,21 @@
       { 'max-h-[100vh] transition-all duration-200 ease-in visible': isModalWarning },
       { 'max-h-0 transition-all duration-200 ease-out invisible': !isModalWarning },
     ]" />
+
+    <ModalWarningCustomer :class="[
+      { 'max-h-[100vh] transition-all duration-200 ease-in visible': isModalWarningCustomer },
+      { 'max-h-0 transition-all duration-200 ease-out invisible': !isModalWarningCustomer },
+    ]" />
+
+
   </div>
 </template>
 
 <script setup lang="ts">
 import { useTaskStore } from './store/task';
+import { useCustomerStore } from './store/customer';
 const { isCloseOverlay, isModalWarning } = storeToRefs(useTaskStore());
+const { isModalWarningCustomer } = storeToRefs(useCustomerStore());
 </script>
 
 <style>

@@ -21,18 +21,18 @@
                 <tr class="bg-white border-b rounded-[10px]  hover:bg-gray-50">
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
                         <div class="ps-3">
-                            <div class="text-base font-semibold">{{ customers.name }}</div>
-                            <div class="font-normal text-gray-500">{{ customers.email }}</div>
+                            <div class="text-base font-semibold">{{ Customer.full_name_customer }}</div>
+                            <div class="font-normal text-gray-500">{{ Customer.email }}</div>
                         </div>
                     </th>
                     <td class="px-6 py-4">
-                        {{ customers.phone }}
+                        {{ Customer.phone }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ customers.adress }}
+                        {{ Customer.address }}
                     </td>
                     <td class="px-6 py-4 flex gap-2">
-                        <nuxt-link :to="`/edit-customer-${customers.id}`"
+                        <nuxt-link :to="`/edit-customer-${Customer.customer_id}`"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] text-white transition duration-100 font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-[10px]">
                             <span>
                                 <svg width="12" height="12" viewBox="0 0 8 8" fill="none"
@@ -46,6 +46,7 @@
                             </span>
                         </nuxt-link>
                         <button type="button"
+                            @click="deleteTask(Customer.customer_id)"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-[10px] text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 flex items-center gap-2">
                             <Icon name="solar:trash-bin-trash-broken" size="20" />
                             <span>Удалить</span>
@@ -57,10 +58,35 @@
     </div>
 </template>
 
-<script setup>
-const props = defineProps({
-    customers: Object
-})
-const emit = defineEmits(['isDeleted'])
-const isMenuEdit = ref(false)
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import {useCustomerStore} from "../store/customer"
+const {getCustomer} = useCustomerStore()
+const {isModalWarningCustomer} = storeToRefs(useCustomerStore())
+
+
+interface Customer {
+    customer_id: number;
+    full_name_customer: string;
+    email: string;
+    phone: string | number;
+    address: string;
+    description: string;
+}
+
+const props = defineProps<{
+    Customer: Customer
+}>()
+
+const deleteTask = async (id: Number) => {
+    isModalWarningCustomer.value = true
+  try {
+    await $fetch('http://localhost:5000/api/customers/' + id, {
+      method: 'DELETE',
+    });
+    getCustomer()
+  } catch (error) {
+    console.log(error)
+  }
+}
 </script>
