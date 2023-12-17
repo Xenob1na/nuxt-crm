@@ -60,7 +60,7 @@ import { useAuthStore } from '../store/auth';
 
 const router = useRouter();
 
-const { logUserOut } = useAuthStore();
+const { logUserOut, getUser } = useAuthStore();
 const { user } = storeToRefs(useAuthStore());
 
 let isLoading = ref(false);
@@ -71,8 +71,6 @@ const logout = () => {
     router.push('/login');
     isLoading.value = false;
 }
-
-
 
 const nav = [
     {
@@ -96,6 +94,14 @@ const nav = [
         path: '/tasks'
     }
 ]
+
+onMounted(async () => {
+    try {
+        await getUser()        
+    } catch (error) {
+        console.log(error)
+    }
+})
 </script>
 
 <style scoped>

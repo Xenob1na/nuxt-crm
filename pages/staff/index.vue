@@ -14,41 +14,87 @@
                         </nuxt-link>
                     </div>
                 </div>
-                <StaffList v-for="staff in staffs" :key="staff.id" :staff="staff"
-                    @isDeleted="staffs = []" />
+
+                <ClientOnly>
+
+                    <template #fallback>
+
+                        <div class="text-black mx-auto flex flex-col items-center justify-center">
+                            <Icon name="line-md:downloading-loop" size="50" color="black" />
+                            <div class="text-black">Загрузка данных...</div>
+                        </div>
+                    </template>
+                </ClientOnly>
+
+                <div v-if="isLoading">
+                    <div class="text-black mx-auto flex flex-col items-center justify-center">
+                        <Icon name="line-md:downloading-loop" size="50" color="black" />
+                        <div class="text-black">Загрузка данных...</div>
+                    </div>
+                </div>
+
+                <div v-else-if="isStaff">
+                    <StaffList v-for="Staff in staffs" :key="Staff.staff_id" :staff="Staff"/>
+                </div>
             </div>
         </MainLayout>
     </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 useHead({
     title: 'Список сотрудников'
 });
 import MainLayout from '../../layouts/MainLayout.vue'
+import { storeToRefs } from 'pinia'
+import { useStaffStore } from "../../store/staff"
 
-const staffs = ref([])
+const { getStaff } = useStaffStore()
+const { staff } = storeToRefs(useStaffStore())
+
+interface StaffModel {
+    staff_id: number;
+    full_name_staff: string;
+    email: string;
+    phone: string;
+    address: string;
+    post: string;
+    age: string;
+    add_resume: any;
+}
+
+const staffs = ref<StaffModel[]>([])
+const isLoading = ref(false)
+const isStaff = ref(false)
+
+onMounted(async () => {
+    isLoading.value = true
+    try {
+        await getStaff()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+})
 
 onBeforeMount(() => {
-    staffs.value = [
-        {
-            id: 1,
-            name: 'John Doe',
-            phone: '+33757005467',
-            email: 'neil.sims@flowbite.com',
-            age: 38,
-            adress: 'New York No. 1 Lake Park',
-            post: 'Tracker',
-        },
-        {
-            id: 2,
-            name: 'Stiven Doe',
-            phone: '+33757005467',
-            email: 'neil.sims@flowbite.com',
-            age: 38,
-            adress: 'New York No. 1 Lake Park',
-            post: 'Tracker',
+    watchEffect(() => {
+        staffs.value = staff.value
+        if (staff && staff.value.length >= 1) {
+            isStaff.value = true
+        } else {
+            isStaff.value = false
         }
-    ]
+    })
 })
+
+watch(() => staffs.value, () => {
+    staffs.value = staff.value
+    if (staff && staff.value.length >= 1) {
+        isStaff.value = true
+    } else {
+        isStaff.value = false
+    }
+}, { deep: true })
 </script>

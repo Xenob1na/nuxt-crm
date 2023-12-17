@@ -22,12 +22,20 @@
                     <template #fallback>
 
                         <div class="text-black mx-auto flex flex-col items-center justify-center">
-                            <Icon name="eos-icons:three-dots-loading" size="50" color="black" />
+                            <Icon name="line-md:downloading-loop" size="50" color="black" />
                             <div class="text-black">Загрузка данных...</div>
                         </div>
                     </template>
                 </ClientOnly>
-                <div class="grid grid-cols-3 gap-3 mt-8" v-if="isTasks">
+
+                <div v-if="isLoading">
+                    <div class="text-black mx-auto flex flex-col items-center justify-center">
+                        <Icon name="line-md:downloading-loop" size="50" color="black" />
+                        <div class="text-black">Загрузка данных...</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-3 mt-8" v-else-if="isTasks">
                     <task v-for="item in items" :key="item.task_id" :items="item" @isDeleted="items = getTask()" />
                 </div>
                 <div v-if="tasks.length === 0" class="mt-10">
@@ -62,12 +70,13 @@ const items = ref<Task[]>([])
 const isTasks = ref(false)
 
 onBeforeMount(async () => {
+    isLoading.value = true;
     try {
-        isLoading.value = true;
         await getTask();
         isLoading.value = false;
     } catch (error) {
         console.log(error);
+        isLoading.value = false;
     }
 })
 

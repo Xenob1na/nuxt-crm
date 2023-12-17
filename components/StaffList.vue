@@ -27,7 +27,7 @@
                 <tr class="bg-white border-b rounded-[10px]  hover:bg-gray-50">
                     <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap ">
                         <div class="ps-3">
-                            <div class="text-base font-semibold">{{ staff.name }}</div>
+                            <div class="text-base font-semibold">{{ staff.full_name_staff }}</div>
                             <div class="font-normal text-gray-500">{{ staff.email }}</div>
                         </div>
                     </th>
@@ -35,7 +35,7 @@
                         {{ staff.phone }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ staff.adress }}
+                        {{ staff.address }}
                     </td>
                     <td class="px-6 py-4">
                         {{ staff.post }}
@@ -44,7 +44,7 @@
                         {{ staff.age }}
                     </td>
                     <td class="px-6 py-4 flex gap-2">
-                        <nuxt-link :to="`/staff/edit-staff-${staff.id}`"
+                        <nuxt-link :to="`/staff/edit-staff-${staff.staff_id}`"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] text-white transition duration-100 font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-[10px]">
                             <span>
                                 <svg width="12" height="12" viewBox="0 0 8 8" fill="none"
@@ -69,10 +69,19 @@
     </div>
 </template>
 
-<script setup>
-const props = defineProps({
-    staff: Object
-})
-const emit = defineEmits(['isDeleted'])
-const isMenuEdit = ref(false)
+<script setup lang="ts">
+interface StaffModel {
+    staff_id: number;
+    full_name_staff: string;
+    email: string;
+    phone: string;
+    address: string;
+    post: string;
+    age: string;
+    add_resume: any;
+}
+
+const props = defineProps<{
+    staff: StaffModel
+}>()
 </script>

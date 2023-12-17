@@ -10,7 +10,7 @@ export const useAuthStore = defineStore("auth", {
     authenticated: false,
     loading: false,
     user: "",
-    err: ""
+    err: "",
   }),
   actions: {
     async authenticateUser({ email, password }: User) {
@@ -26,10 +26,6 @@ export const useAuthStore = defineStore("auth", {
         }
       );
       this.loading = pending;
-      this.user = data?.value?.user.name;
-      
-
-      
 
       if (data.value) {
         const token = useCookie("token");
@@ -43,15 +39,19 @@ export const useAuthStore = defineStore("auth", {
       token.value = null;
     },
     async getUser() {
-      const token = useCookie("token");
-      let res: any = await useFetch("http://localhost:5000/api/get-user", {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "Authorization": `Bearer ${token}`,
-        },
-      });
-      this.user = res.data?.value?.name;
-      return res.data;
+      try {
+        const token = useCookie("token");
+        let Token: any = token.value;
+        const res: any = await $fetch("http://localhost:5000/api/get-user", {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${Token}`,
+          },
+        });
+        this.user = res.data.name;
+      } catch (error) {
+        console.log(error)
+      }
     },
   },
 });
