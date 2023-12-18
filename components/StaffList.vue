@@ -58,6 +58,7 @@
                             </span>
                         </nuxt-link>
                         <button type="button"
+                            @click="deleteTask(staff.staff_id)"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-[10px] text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 flex items-center gap-2">
                             <Icon name="solar:trash-bin-trash-broken" size="20" />
                             <span>Удалить</span>
@@ -70,6 +71,11 @@
 </template>
 
 <script setup lang="ts">
+import { storeToRefs } from "pinia";
+import {useStaffStore} from "../store/staff"
+const {getStaff} = useStaffStore()
+const {isModalWarningStaff} = storeToRefs(useStaffStore())
+
 interface StaffModel {
     staff_id: number;
     full_name_staff: string;
@@ -84,4 +90,16 @@ interface StaffModel {
 const props = defineProps<{
     staff: StaffModel
 }>()
+
+const deleteTask = async (id: number) => {
+    isModalWarningStaff.value = true
+    try {
+        await $fetch('http://localhost:5000/api/staffs/' + id, {
+            method: 'DELETE',
+        })
+        await getStaff()
+    } catch (error) {
+        console.log(error)
+    }
+}
 </script>

@@ -72,12 +72,17 @@ const user = ref({
 const router = useRouter();
 
 const login = async () => {
-    await authenticateUser(user.value);
     loading.value = true;
+    try {
+        await authenticateUser(user.value);
+        if (authenticated) {
+            router.push('/')
 
-    if (authenticated) {
-        router.push('/')
-
+        }
+        loading.value = false;
+    } catch (error) {
+        console.log(error)
+        loading.value = false;
     }
 }
 </script>

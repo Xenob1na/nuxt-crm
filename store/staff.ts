@@ -14,6 +14,7 @@ interface StaffModel {
 export const useStaffStore = defineStore("staff", {
     state: () => ({
         staff: [] as StaffModel[],
+        isModalWarningStaff: false
     }),
     actions: {
         async getStaff() {

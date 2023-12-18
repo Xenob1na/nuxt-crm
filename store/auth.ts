@@ -35,8 +35,8 @@ export const useAuthStore = defineStore("auth", {
     },
     logUserOut() {
       const token = useCookie("token");
-      this.authenticated = false;
       token.value = null;
+      this.authenticated = false;
     },
     async getUser() {
       try {
