@@ -8,17 +8,17 @@
             <div class="bg-white py-6 sm:py-8 lg:py-9 rounded-[10px]">
                 <div class="mx-auto max-w-screen-2xl px-4 md:px-8">
 
-                    <form class="mx-auto  rounded-lg" @click.prevent="">
+                    <form class="mx-auto  rounded-lg" @click.prevent="" aria-disabled="true">
                         <div class="flex flex-col gap-4 p-4 md:p-8">
                             <div>
-                                <label for="fullName" class="mb-2 inline-block text-[#030229] text-base">ФИО</label>
+                                <label for="fullName" class="mb-2 inline-block text-[#030229] text-base">ФИО Сотрудника</label>
                                 <input name="fullName" v-model="form.full_name_staff"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                             </div>
 
                             <div>
                                 <label for="email"
-                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
+                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Почта (email)</label>
                                 <input name="email" v-model="form.email"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                             </div>
@@ -33,7 +33,7 @@
 
                             <div>
                                 <label for="adress"
-                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Адрес</label>
+                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Адрес проживания</label>
                                 <input name="adress"
                                 v-model="form.address"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />

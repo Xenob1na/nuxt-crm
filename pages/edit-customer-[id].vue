@@ -14,7 +14,7 @@
                     <form class="mx-auto  rounded-lg" @click.prevent="">
                         <div class="flex flex-col gap-4 p-4 md:p-8">
                             <div>
-                                <label for="fullName" class="mb-2 inline-block text-[#030229] text-base">ФИО</label>
+                                <label for="fullName" class="mb-2 inline-block text-[#030229] text-base">ФИО Клиента</label>
                                 <input name="fullName"
                                     v-model="form.full_name_customer"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
@@ -22,7 +22,7 @@
 
                             <div>
                                 <label for="email"
-                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Email</label>
+                                    class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Почта (email)</label>
                                 <input name="email"
                                 v-model="form.email"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
@@ -36,7 +36,7 @@
                             </div>
 
                             <div>
-                                <label for="adress" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Адрес</label>
+                                <label for="adress" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Адрес доставки</label>
                                 <input name="adress"
                                 v-model="form.address"
                                     class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />

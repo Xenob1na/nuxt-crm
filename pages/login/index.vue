@@ -14,7 +14,7 @@
                 <form class="mx-auto max-w-lg rounded-lg">
                     <div class="flex flex-col gap-4 p-4 md:p-8">
                         <div>
-                            <label for="email" class="mb-2 inline-block text-[#030229] text-base">Email</label>
+                            <label for="email" class="mb-2 inline-block text-[#030229] text-base">Почта</label>
                             <input name="email" v-model="user.email" required
                                 class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
 
@@ -22,7 +22,7 @@
 
                         <div>
                             <label for="password"
-                                class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Password</label>
+                                class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Пароль</label>
                             <input type="password" name="password" v-model="user.password" required
                                 class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
                         </div>
