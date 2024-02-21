@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 interface StaffModel {
-    staff_id: number;
+    id: number;
     full_name_staff: string;
     email: string;
     phone: string;
@@ -19,8 +19,8 @@ export const useStaffStore = defineStore("staff", {
     actions: {
         async getStaff() {
             try {
-                const result = await $fetch("http://localhost:5000/api/staffs")
-                this.staff = result as StaffModel[]
+                const result: any = await $fetch("http://localhost:5000/api/staffs")
+                this.staff = result?.data as StaffModel[]
             } catch (error) {
                 console.log(error)
             }

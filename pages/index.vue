@@ -33,7 +33,7 @@
                 </div>
 
                 <div v-else-if="isCustomer">
-                    <CustomerList v-for="Customer in customers" :key="Customer.customer_id" :Customer="Customer"
+                    <CustomerList v-for="Customer in customers" :key="Customer.id" :Customer="Customer"
                          />
                 </div>
             </div>
@@ -54,7 +54,7 @@ const { getCustomer } = useCustomerStore()
 const { customer } = storeToRefs(useCustomerStore())
 
 interface Customer {
-    customer_id: number;
+    id: number;
     full_name_customer: string;
     email: string;
     phone: string | number;

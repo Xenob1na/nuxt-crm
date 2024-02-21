@@ -86,7 +86,7 @@ const route = useRoute()
 const router = useRouter()
 
 interface StaffModel {
-    staff_id: number;
+    id: number;
     full_name_staff: string;
     email: string;
     phone: string;
@@ -120,8 +120,8 @@ const updatedCustomer = async () => {
 
 const fetchData = async () => {
     try {
-        const result = await $fetch('http://localhost:5000/api/staffs/' + route.params.id);
-        const data = result as StaffModel;
+        const result: any = await $fetch('http://localhost:5000/api/staffs/' + route.params.id);
+        const data = result?.data as StaffModel;
 
         form.full_name_staff = data.full_name_staff;
         form.email = data.email;

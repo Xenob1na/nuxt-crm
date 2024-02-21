@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 
 interface Task {
-  task_id: number;
+  id: number;
   task_title: string;
   task_body: string;
-  created_date: string;
+  createdAt: string;
 }
 
 interface TaskCreate {
@@ -21,8 +21,8 @@ export const useTaskStore = defineStore("tasks", {
   actions: {
     async getTask() {
       try {
-        const result = await $fetch("http://localhost:5000/api/tasks");
-        this.tasks = result as Task[];
+        const result: any = await $fetch("http://localhost:5000/api/tasks");
+        this.tasks = result?.data as Task[];
       } catch (error) {
         console.log(error);
       }

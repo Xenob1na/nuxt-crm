@@ -36,7 +36,7 @@
                 </div>
 
                 <div class="grid grid-cols-3 gap-3 mt-8" v-else-if="isTasks">
-                    <task v-for="item in items" :key="item.task_id" :items="item" @isDeleted="items = getTask()" />
+                    <task v-for="item in items" :key="item.id" :items="item" @isDeleted="items = getTask()" />
                 </div>
                 <div v-if="tasks.length === 0" class="mt-10">
                     <h3 class="text-center text-[22px] text-[#030229]">Нету заметок, создайте их и ничего не забудьте!!!
@@ -59,10 +59,10 @@ const { getTask } = useTaskStore();
 const { tasks, isCloseOverlay } = storeToRefs(useTaskStore());
 
 interface Task {
-    task_id: number;
+    id: number;
     task_title: string;
     task_body: string;
-    created_date: string;
+    createdAt: string;
 }
 
 const isLoading = ref(false)

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 
 interface Customer {
-  customer_id: number;
+  id: number;
   full_name_customer: string;
   email: string;
   phone: string | number;
@@ -17,8 +17,8 @@ export const useCustomerStore = defineStore("customer", {
   actions: {
     async getCustomer() {
       try {
-        const result = await $fetch("http://localhost:5000/api/customers");
-        this.customer = result as Customer[];
+        const result: any = await $fetch("http://localhost:5000/api/customers");
+        this.customer = result?.data as Customer[];
       } catch (error) {
         console.log(error);
       }

@@ -44,7 +44,7 @@
                         {{ staff.age }}
                     </td>
                     <td class="px-6 py-4 flex gap-2">
-                        <nuxt-link :to="`/staff/edit-staff-${staff.staff_id}`"
+                        <nuxt-link :to="`/staff/edit-staff-${staff.id}`"
                             class="flex items-center gap-2 bg-[#605BFF] hover:bg-[#4b46c5] text-white transition duration-100 font-medium text-sm px-5 py-2.5 me-2 mb-2 rounded-[10px]">
                             <span>
                                 <svg width="12" height="12" viewBox="0 0 8 8" fill="none"
@@ -58,7 +58,7 @@
                             </span>
                         </nuxt-link>
                         <button type="button"
-                            @click="deleteTask(staff.staff_id)"
+                            @click="deleteTask(staff.id)"
                             class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-[10px] text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900 flex items-center gap-2">
                             <Icon name="solar:trash-bin-trash-broken" size="20" />
                             <span>Удалить</span>
@@ -77,7 +77,7 @@ const {getStaff} = useStaffStore()
 const {isModalWarningStaff} = storeToRefs(useStaffStore())
 
 interface StaffModel {
-    staff_id: number;
+    id: number;
     full_name_staff: string;
     email: string;
     phone: string;

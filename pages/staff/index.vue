@@ -34,7 +34,7 @@
                 </div>
 
                 <div v-else-if="isStaff">
-                    <StaffList v-for="Staff in staffs" :key="Staff.staff_id" :staff="Staff"/>
+                    <StaffList v-for="Staff in staffs" :key="Staff.id" :staff="Staff"/>
                 </div>
             </div>
         </MainLayout>
@@ -53,7 +53,7 @@ const { getStaff } = useStaffStore()
 const { staff } = storeToRefs(useStaffStore())
 
 interface StaffModel {
-    staff_id: number;
+    id: number;
     full_name_staff: string;
     email: string;
     phone: string;

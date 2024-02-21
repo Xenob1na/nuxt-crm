@@ -14,7 +14,7 @@
           </button>
 
           <div v-if="isMenu" class="absolute border right-0 z-20 mt-1 rounded">
-            <button @click="deleteTask(items.task_id)"
+            <button @click="deleteTask(items.id)"
               class="flex items-center rounded gap-2 text-red-500 justify-between bg-white w-full pl-4 pr-3 py-2 hover:bg-[#e1e1e1]">
               <div>Удалить</div>
               <Icon name="solar:trash-bin-trash-broken" size="20" />
@@ -28,7 +28,7 @@
       <div class="flex justify-end mt-4">
         <p class="text-[#030229] text-[14px] font-bold flex items-center gap-2">
           <Icon name="fluent-mdl2:event-date" color="black" width="16" height="16" />
-          <span>{{ displayableDate(items.created_date) }}</span>
+          <span>{{ displayableDate(items.createdAt) }}</span>
         </p>
       </div>
     </div>
@@ -41,10 +41,10 @@ import { useTaskStore } from '../store/task';
 const { isModalWarning } = storeToRefs(useTaskStore())
 
 interface Task {
-  task_id: number;
+  id: number;
   task_title: string;
   task_body: string;
-  created_date: string;
+  createdAt: string;
 }
 
 const props = defineProps<{

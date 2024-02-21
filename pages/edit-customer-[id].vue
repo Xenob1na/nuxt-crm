@@ -71,7 +71,7 @@ const route = useRoute()
 const router = useRouter()
 
 interface Customer {
-  customer_id: number;
+  id: number;
   full_name_customer: string;
   email: string;
   phone: string;
@@ -101,8 +101,8 @@ const updatedCustomer = async () => {
 
 const fetchData = async () => {
     try {
-        const result = await $fetch('http://localhost:5000/api/customers/' + route.params.id);
-        const data = result as Customer;
+        const result: any = await $fetch('http://localhost:5000/api/customers/' + route.params.id);
+        const data = result?.data as Customer;
 
         form.full_name_customer = data.full_name_customer;
         form.email = data.email;
