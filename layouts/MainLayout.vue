@@ -1,4 +1,10 @@
 <template>
+    <div v-if="loading" class="fixed top-0 left-0 w-full h-full bg-black/25 flex justify-center items-center z-[100]">
+        <div class="grid place-items-center">
+            <Icon name="eos-icons:bubble-loading" size="50" color="white" />
+            <p class="text-white text-[16px] font-bold mt-3">Загрузка...</p>
+        </div>
+    </div>
     <div id="Menu-Left">
         <div class="bg-white py-[50px] px-6">
             <div class="flex gap-4 items-center">
@@ -46,13 +52,21 @@ import { useAuthStore } from '../store/auth';
 const router = useRouter();
 
 const { logUserOut, getUser } = useAuthStore();
-const { user } = storeToRefs(useAuthStore());
+const { user, loading } = storeToRefs(useAuthStore());
 
 
 
-const logout = () => {
-    logUserOut();
-    router.push('/login');
+const logout = async () => {
+    try {
+        loading.value = true;
+        setTimeout(() => {
+            loading.value = false;
+            logUserOut();
+            router.push('/login');
+        }, 3000);
+    } catch (error) {
+
+    }
 
 }
 
