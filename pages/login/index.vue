@@ -26,9 +26,10 @@
                     <div class="flex flex-col gap-4 p-4 md:p-8">
                         <div>
                             <label for="email" class="mb-2 inline-block text-[#030229] text-base">Почта</label>
-                            <input name="email" v-model="user.email" required
+                            <input name="email" v-model="user.email" required :class="{ 'border-red-500': isValidEmail === false }"
                                 class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
 
+                            <div class="text-red-500 mt-2">{{ msgValue }}</div>
                         </div>
 
                         <div>
@@ -39,7 +40,7 @@
                         </div>
 
                         <button @click.prevent="login"
-                            class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
+                            class="block rounded-lg bg-[#605BFF] hover:bg-[#4b46c5] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
                             <span>Авторизоваться</span>
                         </button>
 
@@ -58,7 +59,7 @@ useHead({
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '../../store/auth';
 
-const { authenticateUser, getUser } = useAuthStore();
+const { authenticateUser } = useAuthStore();
 const { authenticated, loading, mssg } = storeToRefs(useAuthStore());
 
 const isMsg = ref(false)
@@ -83,7 +84,6 @@ const user = ref({
 const router = useRouter();
 
 const login = async () => {
-    // await getUser()
     loading.value = true;
     setTimeout(() => {
         loading.value = false;
@@ -92,7 +92,7 @@ const login = async () => {
     try {
 
         await authenticateUser(user.value);
-
+        startValidation.value = true
         if (authenticated) {
             router.push('/')
         }
@@ -102,6 +102,17 @@ const login = async () => {
         loading.value = false;
     }
 }
-</script>
 
-<style></style>
+const startValidation = ref(false)
+const msgValue = ref('')
+const isValidEmail = computed(() => {
+    if (isValidEmail.value === null) {
+        let text = 'Не верная почта'
+        msgValue.value = text
+    } else {
+        msgValue.value = ''
+    }
+
+    return startValidation.value ? /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(user.value.email) : null
+})
+</script>

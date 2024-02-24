@@ -19,7 +19,10 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@nuxtjs/proxy": "^2.1.0",
     "@pinia/nuxt": "^0.5.1",
+    "@vee-validate/nuxt": "^4.12.5",
+    "@vee-validate/yup": "^4.12.5",
     "primevue": "^3.42.0",
     "vuedraggable": "^4.1.0"
   }
