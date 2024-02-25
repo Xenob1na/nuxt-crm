@@ -33,8 +33,19 @@
                 </div>
 
                 <div v-else-if="isCustomer">
-                    <CustomerList v-for="Customer in customers" :key="Customer.id" :Customer="Customer"
-                         />
+                    <CustomerList v-for="Customer in customers" :key="Customer.id" :Customer="Customer" />
+                </div>
+                <div class="flex items-center justify-between mt-4">
+                    <button @click="loadMoreBack"
+                        class="rounded-lg bg-[#605BFF] hover:bg-[#4b46c5] flex items-center   px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
+                        <Icon name="grommet-icons:form-next" color="white" width="24" height="24" class="rotate-180" />
+                        <span>Назад</span>
+                    </button>
+                    <button @click="loadMoreNext"
+                        class="rounded-lg bg-[#605BFF] hover:bg-[#4b46c5]  px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
+                        <span>Вперед</span>
+                        <Icon name="grommet-icons:form-next" color="white" width="24" height="24" />
+                    </button>
                 </div>
             </div>
         </MainLayout>
@@ -51,7 +62,7 @@ import { storeToRefs } from 'pinia';
 import { useCustomerStore } from '../store/customer'
 
 const { getCustomer } = useCustomerStore()
-const { customer } = storeToRefs(useCustomerStore())
+const { customer, currentPage } = storeToRefs(useCustomerStore())
 
 interface Customer {
     id: number;
@@ -65,6 +76,7 @@ interface Customer {
 const customers = ref<Customer[]>([])
 const isCustomer = ref(false)
 const isLoading = ref(false)
+
 
 onMounted(async () => {
     isLoading.value = true
@@ -96,4 +108,32 @@ watch(() => customers.value, () => {
         isCustomer.value = false
     }
 }, { deep: true })
+
+
+
+const loadMoreNext = async () => {
+    isLoading.value = true
+    try {
+        currentPage.value++
+        await getCustomer()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+}
+
+const loadMoreBack = async () => {
+    isLoading.value = true
+    try {
+        currentPage.value--
+        await getCustomer()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+}
+
+
 </script>

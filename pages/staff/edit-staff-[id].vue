@@ -66,7 +66,7 @@
                             </div> -->
 
                             <button
-                                class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base" @click="updatedCustomer">Сохранить</button>
+                                class="block rounded-lg bg-[#605BFF] hover:bg-[#4b46c5] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base" @click="updatedCustomer">Сохранить</button>
                         </div>
                     </form>
 

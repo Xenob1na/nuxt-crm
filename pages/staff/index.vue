@@ -34,7 +34,20 @@
                 </div>
 
                 <div v-else-if="isStaff">
-                    <StaffList v-for="Staff in staffs" :key="Staff.id" :staff="Staff"/>
+                    <StaffList v-for="Staff in staffs" :key="Staff.id" :staff="Staff" />
+                </div>
+
+                <div class="flex items-center justify-between mt-4">
+                    <button @click="loadMoreBack"
+                        class="rounded-lg bg-[#605BFF] hover:bg-[#4b46c5] flex items-center   px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
+                        <Icon name="grommet-icons:form-next" color="white" width="24" height="24" class="rotate-180" />
+                        <span>Назад</span>
+                    </button>
+                    <button @click="loadMoreNext"
+                        class="rounded-lg bg-[#605BFF] hover:bg-[#4b46c5]  px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base">
+                        <span>Вперед</span>
+                        <Icon name="grommet-icons:form-next" color="white" width="24" height="24" />
+                    </button>
                 </div>
             </div>
         </MainLayout>
@@ -50,7 +63,7 @@ import { storeToRefs } from 'pinia'
 import { useStaffStore } from "../../store/staff"
 
 const { getStaff } = useStaffStore()
-const { staff } = storeToRefs(useStaffStore())
+const { staff, currentPage } = storeToRefs(useStaffStore())
 
 interface StaffModel {
     id: number;
@@ -97,4 +110,29 @@ watch(() => staffs.value, () => {
         isStaff.value = false
     }
 }, { deep: true })
+
+
+const loadMoreNext = async () => {
+    isLoading.value = true
+    try {
+        currentPage.value++
+        await getStaff()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+}
+
+const loadMoreBack = async () => {
+    isLoading.value = true
+    try {
+        currentPage.value--
+        await getStaff()
+        isLoading.value = false
+    } catch (error) {
+        console.log(error)
+        isLoading.value = false
+    }
+}
 </script>

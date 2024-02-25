@@ -12,19 +12,21 @@
 
                     <div>
                         <label for="adress" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Заголовок</label>
-                        <input name="task_title"
-                            v-model="form.task_title"
-                            class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" />
+                        <input name="task_title" v-model="form.task_title" 
+                            class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" :class="{ 'border-red-500': isValidTitle === false, 'border-green-500': isValidTitle === true }" />
+                            <div class="text-red-500 mt-2">{{ msgTitle }}</div>
                     </div>
 
                     <div>
                         <label for="task_body" class="mb-2 inline-block text-sm text-gray-800 sm:text-base">Описание
                             заметки</label>
                         <textarea id="description" rows="4" v-model="form.task_body"
-                            class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"></textarea>
+                            class="w-full rounded border bg-[#F7F7F8] px-4 py-3 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring" :class="{ 'border-red-500': isValidBody === false, 'border-green-500': isValidBody === true }"></textarea>
+                            <div class="text-red-500 mt-2">{{ msgBody }}</div>
                     </div>
                     <button
-                                class="block rounded-lg bg-[#605BFF] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base" @click="CreateTask">Добавить</button>
+                        class="block rounded-lg bg-[#605BFF] hover:bg-[#4b46c5] px-8 py-4 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base"
+                        @click="CreateTask">Добавить</button>
                 </div>
             </form>
         </div>
@@ -50,9 +52,48 @@ const clearData = () => {
 }
 
 const CreateTask = async () => {
-    await addTask(form)
-    await getTask()
-    clearData()
-    isCloseOverlay.value = false 
+    try {
+        if (form.task_body && form.task_title !== '') {
+            await addTask(form)
+            await getTask()
+            clearData()
+            isCloseOverlay.value = false
+        }
+        startValidation.value = true
+    } catch (error) {
+        console.log(error)
+        isCloseOverlay.value = false
+        startValidation.value = true
+    }
 }
+
+const startValidation = ref(false)
+const msgTitle = ref('')
+const isValidTitle = computed(() => {
+    if (isValidTitle.value === null) {
+        let text = 'Заполните поле'
+        msgTitle.value = text
+    }
+
+    if (isValidTitle.value === true) {
+        msgTitle.value = ''
+    }
+
+    return startValidation.value ? form.task_title !== '' : null
+})
+
+const msgBody = ref('')
+const isValidBody = computed(() => {
+    if (isValidBody.value === null) {
+        let text = 'Заполните поле'
+        msgBody.value = text
+    }
+
+    if (isValidBody.value === true) {
+        msgBody.value = ''
+    }
+
+    return startValidation.value ? form.task_body !== '' : null
+})
+
 </script>

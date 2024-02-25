@@ -14,13 +14,14 @@ interface StaffModel {
 export const useStaffStore = defineStore("staff", {
     state: () => ({
         staff: [] as StaffModel[],
-        isModalWarningStaff: false
+        isModalWarningStaff: false,
+        currentPage: 1
     }),
     actions: {
         async getStaff() {
             try {
-                const result: any = await $fetch("http://localhost:5000/api/staffs")
-                this.staff = result?.data as StaffModel[]
+                const result: any = await $fetch(`http://localhost:5000/api/staffs?page=${this.currentPage}&limit=4`)
+                this.staff = result?.data.rows as StaffModel[]
             } catch (error) {
                 console.log(error)
             }

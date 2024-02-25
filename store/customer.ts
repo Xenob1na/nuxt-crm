@@ -12,13 +12,14 @@ interface Customer {
 export const useCustomerStore = defineStore("customer", {
   state: () => ({
     customer: [] as Customer[],
-    isModalWarningCustomer: false
+    isModalWarningCustomer: false,
+    currentPage: 1
   }),
   actions: {
     async getCustomer() {
       try {
-        const result: any = await $fetch("http://localhost:5000/api/customers");
-        this.customer = result?.data as Customer[];
+        const result: any = await $fetch(`http://localhost:5000/api/customers?page=${this.currentPage}&limit=4`);
+        this.customer = result?.data.rows as Customer[];
       } catch (error) {
         console.log(error);
       }
